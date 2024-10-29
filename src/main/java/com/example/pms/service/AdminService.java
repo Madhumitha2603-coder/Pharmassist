@@ -1,6 +1,7 @@
 package com.example.pms.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,27 +29,29 @@ import jakarta.validation.Valid;
 		}
 		
 		public AdminResponse saveAdmin(AdminRequest adminRequest) {
-		
-			
-			Admin admin = adminRepository.save(adminMapper.mapToAdmin(adminRequest,new Admin()));
-			return adminMapper.mapToAdminResponse(admin);
+		    return Optional.of(adminRequest)
+		        .map(request -> adminMapper.mapToAdmin(request, new Admin()))
+		        .map(adminRepository::save)
+		        .map(adminMapper::mapToAdminResponse)
+		        .orElseThrow(() -> new RuntimeException("Failed to save admin"));
 		}
 
-		public AdminResponse findAdmin(String adminId) {
+		public AdminResponse findAdminById(String adminId) {
+			 return adminRepository.findById(adminId)
+				        .map(adminMapper::mapToAdminResponse)
+				        .orElseThrow(() -> new AdminNotFoundByIdException("Failed to find user"));
 			
-
-				Optional<Admin> optional =adminRepository.findById(adminId);
-
-				if(optional.isPresent()) {
-					return adminMapper.mapToAdminResponse(optional.get());
-				}
-				else {
-				 throw new AdminNotFoundByIdException("failed to find user");
-				}
-			}
+		}
 			
-		
-
+		public AdminResponse updateAdmin(AdminRequest adminRequest, String adminId) {
+		    return adminRepository.findById(adminId)
+		        .map(admin -> adminMapper.mapToAdmin(adminRequest, admin))
+		        .map(adminRepository::save)
+		        .map(adminMapper::mapToAdminResponse)
+		        .orElseThrow(() -> new AdminNotFoundException("Failed to update the admin"));
+		}
+	
+	
 		
 		
 

@@ -1,6 +1,8 @@
 package com.example.pms.controller;
 
-	import org.springframework.http.HttpStatus;
+	import java.util.List;
+
+import org.springframework.http.HttpStatus;
 	import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,10 +42,22 @@ public class AdminController {
 		}
 		@GetMapping("/findbyid/{adminId}")
 		public ResponseEntity<ResponseStructure<AdminResponse>> findUser(@PathVariable String adminId){
-			AdminResponse response = adminService.findAdmin(adminId);
+			AdminResponse response = adminService.findAdminById(adminId);
 			return responseBuilder.success(HttpStatus.FOUND, "user is found",response);
 		}
 		
+		
+		@PutMapping("/updateadmins/{adminId}")
+		public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@RequestBody AdminRequest userRequest, @PathVariable String adminId){
+			AdminResponse response =  adminService.updateAdmin(userRequest, adminId);
+			return responseBuilder.success(HttpStatus.OK, "User updated",response);
+		}
+		
+		
+	
+		
+		
+	
 		
 		
 		
