@@ -3,6 +3,7 @@ package com.example.pms.controller;
 	import org.springframework.http.HttpStatus;
 	import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,6 +37,11 @@ public class AdminController {
 			AdminResponse response =  adminService.saveAdmin(adminRequest);
 			return responseBuilder.success(HttpStatus.CREATED, "Admin Created",response);
 			
+		}
+		@GetMapping("/findbyid/{adminId}")
+		public ResponseEntity<ResponseStructure<AdminResponse>> findUser(@PathVariable String adminId){
+			AdminResponse response = adminService.findAdmin(adminId);
+			return responseBuilder.success(HttpStatus.FOUND, "user is found",response);
 		}
 		
 		

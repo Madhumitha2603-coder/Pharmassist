@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.pms.entity.Admin;
+import com.example.pms.exception.AdminNotFoundByIdException;
 import com.example.pms.exception.AdminNotFoundException;
 import com.example.pms.mapper.AdminMapper;
 import com.example.pms.repository.AdminRepository;
@@ -32,6 +33,21 @@ import jakarta.validation.Valid;
 			Admin admin = adminRepository.save(adminMapper.mapToAdmin(adminRequest,new Admin()));
 			return adminMapper.mapToAdminResponse(admin);
 		}
+
+		public AdminResponse findAdmin(String adminId) {
+			
+
+				Optional<Admin> optional =adminRepository.findById(adminId);
+
+				if(optional.isPresent()) {
+					return adminMapper.mapToAdminResponse(optional.get());
+				}
+				else {
+				 throw new AdminNotFoundByIdException("failed to find user");
+				}
+			}
+			
+		
 
 		
 		
