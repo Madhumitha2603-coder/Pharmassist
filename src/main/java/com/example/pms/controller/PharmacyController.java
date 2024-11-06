@@ -37,6 +37,13 @@ package com.example.pms.controller;
 			return responseBuilder.success(HttpStatus.CREATED, "Pharmacy Created", response);
 		}
 		
+		@GetMapping("/findadmins/{adminId}/pharmacies")
+		public ResponseEntity<ResponseStructure<PharmacyResponse>> findPharmacyByAdminId(@PathVariable String adminId)
+		{
+			PharmacyResponse response = pharmacyService.findPharmacyByAdminId(adminId);
+			return responseBuilder.success(HttpStatus.FOUND,"Pharmacy associated with admin found",response );
+		}
+
 
 
 }

@@ -40,6 +40,25 @@ package com.example.pms.service;
 	    				      })
 	    				     .orElseThrow(() ->new AdminNotFoundByIdException("Failed to find Admin"));
 		}
+	    public PharmacyResponse findPharmacyByAdminId(String adminId) {
+			
+			Admin admin = adminRepository.findById(adminId)
+					                     .orElseThrow(() -> new AdminNotFoundByIdException("Failed to find Admin by Id"));
+
+			Pharmacy pharmacy = adminRepository.findPharmacyByAdminId(adminId);
+			if(pharmacy == null)
+			{
+				throw new NoPharmacyFoundException("No Pharmacy associated with admin ID:"+adminId);
+			}
+			return pharmacyMapper.mapToPharmacyResponse(pharmacy);
+
+//			return adminRepository.findById(adminId)
+//							.map(Admin::getPharmacy)  // Extract the pharmacy from the admin
+//							.map(pharmacyMapper::mapToPharmacyResponse)  // Map Pharmacy to PharmacyResponse
+//							.orElseThrow(() -> new NoPharmarcyFoundException("No Pharmacy associated with admin ID:"+adminId));
+
+		}
+
 
 	
 
