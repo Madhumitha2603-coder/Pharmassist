@@ -1,10 +1,13 @@
 package com.example.pms.entity;
 
 
-	import com.example.pms.config.GenerateCustomerId;
+	import java.util.List;
+
+import com.example.pms.config.GenerateCustomerId;
 
 	import jakarta.persistence.Entity;
 	import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -22,6 +25,17 @@ import jakarta.persistence.OneToOne;
 		
 		@OneToOne(mappedBy = "pharmacy")
 		private Admin admin;
+		@OneToMany(mappedBy = "pharmacy")
+		private List<Patient> patients;
+
+		public List<Patient> getPatients() {
+			return patients;
+		}
+
+		public void setPatients(List<Patient> patients) {
+			this.patients = patients;
+		}
+
 		public Admin getAdmin() {
 			return admin;
 		}
