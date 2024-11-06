@@ -17,6 +17,16 @@ package com.example.pms.entity;
 		private String adminPhoneNumber;
 		private String adminPassword;
 		
+		@OneToOne
+		private Pharmacy pharmacy;
+		
+		public Pharmacy getPharmacy() {
+			return pharmacy;
+		}
+		public void setPharmacy(Pharmacy pharmacy) {
+			this.pharmacy = pharmacy;
+		}
+		
 		public String getAdminId() {
 			return adminId;
 		}
