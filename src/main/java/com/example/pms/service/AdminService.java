@@ -45,4 +45,16 @@ import com.example.pms.mapper.AdminMapper;
 		                               .toList();		
 			}
 
+			public AdminResponse updateAdmin(AdminRequest adminRequest, String adminId) {
+				
+				return adminRepository.findById(adminId)
+		                .map(exAdmin -> {
+		       	          adminMapper.mapToAdmin(adminRequest, exAdmin);
+		       	          return adminRepository.save(exAdmin);
+		                })
+		                .map(adminMapper::mapToAdminResponse)
+		                .orElseThrow(() -> new AdminNotFoundByIdException("Failed to update admin"));
+		}
+
+
 }
