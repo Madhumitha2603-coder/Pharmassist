@@ -52,5 +52,11 @@ package com.example.pms.controller;
 			List<AdminResponse> responses = adminService.findAllAdmins();
 			return responseBuilder.success(HttpStatus.FOUND,"Admins Found", responses);
 		}
+		@PutMapping("/updateadmins/{adminId}")
+		public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@RequestBody AdminRequest adminRequest,@PathVariable String adminId) {
+			
+			AdminResponse response = adminService.updateAdmin(adminRequest, adminId);
+			return responseBuilder.success(HttpStatus.OK,"Admin updated", response);
+		}
 
 }
