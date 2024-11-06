@@ -43,6 +43,14 @@ package com.example.pms.controller;
 			PharmacyResponse response = pharmacyService.findPharmacyByAdminId(adminId);
 			return responseBuilder.success(HttpStatus.FOUND,"Pharmacy associated with admin found",response );
 		}
+		@PutMapping("/pharmacies/{pharmacyId}")
+		public ResponseEntity<ResponseStructure<PharmacyResponse>> updatePharmacy(@RequestBody PharmacyRequest pharmacyRequest,@PathVariable String pharmacyId)
+		{
+			PharmacyResponse response = pharmacyService.updatePharmacy(pharmacyRequest, pharmacyId);
+			return responseBuilder.success(HttpStatus.OK,"Pharmacy Updated", response);
+		}
+		
+
 
 
 
