@@ -43,6 +43,14 @@ package com.example.pms.controller;
 		    List<PatientResponse> response = patientService.findAllPatientByPharmacyId(pharmacyId);
 		    return responseBuilder.success(HttpStatus.FOUND, "Patients associated with the pharmacyId found", response);
 		}
+		@PutMapping("updatepatients/{patientId}")
+		public ResponseEntity<ResponseStructure<PatientResponse>> updatePatient(@RequestBody PatientRequest patientRequest, @PathVariable String patientId) {
+			
+			PatientResponse response = patientService.updatePatient(patientRequest, patientId);
+			return responseBuilder.success(HttpStatus.OK,"Patient Updated", response);
+			
+		}
+
 
 
 		

@@ -53,6 +53,20 @@ package com.example.pms.service;
 				        
 	       
 			}
+		
+		public PatientResponse updatePatient(PatientRequest patientRequest, String patientId) {
+			
+			return 	patientRepository.findById(patientId)
+				                    .map(exPatient -> {
+				                      	patientMapper.mapToPatient(patientRequest, exPatient);
+					                   return patientRepository.save(exPatient);
+				                    })
+				                    .map(patientMapper::mapToPatientResponse)
+				              .orElseThrow(() -> new PatientNotFoundByIdException("Failed to update Patient"));
+				
+				
+			}
+
 
 
 
