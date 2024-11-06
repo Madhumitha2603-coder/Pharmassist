@@ -38,6 +38,14 @@ package com.example.pms.controller;
 			 return responseBuilder.success(HttpStatus.CREATED,"Patient registered",response);
 		}	
 		
+		@GetMapping("/pharmacies/{pharmacyId}/findpatients")
+		public ResponseEntity<ResponseStructure<List<PatientResponse>>> findAllPatientsByPharmacyId(@PathVariable String pharmacyId) {
+		    List<PatientResponse> response = patientService.findAllPatientByPharmacyId(pharmacyId);
+		    return responseBuilder.success(HttpStatus.FOUND, "Patients associated with the pharmacyId found", response);
+		}
+
+
+		
 		
 
 }

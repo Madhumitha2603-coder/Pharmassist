@@ -40,6 +40,20 @@ package com.example.pms.service;
 					.orElseThrow(() ->new PharmacyNotFoundByIdException("Failed to find Pharmacy"));
 	                        
 		}
+		
+		public List<PatientResponse> findAllPatientByPharmacyId(String pharmacyId) {
+			
+			 return pharmacyRepository.findById(pharmacyId)
+				        .map(pharmacy -> patientRepository.findByPharmacy(pharmacy))
+				        .filter(patients -> !patients.isEmpty())
+				        .orElseThrow(() -> new NoPatientsFoundException("Failed to find patients associated with the pharmacyID: " + pharmacyId))
+				        .stream()
+				        .map(patientMapper::mapToPatientResponse)
+				        .toList();
+				        
+	       
+			}
+
 
 
 }
