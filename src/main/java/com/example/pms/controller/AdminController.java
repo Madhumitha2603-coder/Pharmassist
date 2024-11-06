@@ -40,6 +40,11 @@ package com.example.pms.controller;
 		}
 		
 
-
+		@GetMapping("/findadmins/{adminId}")
+		public ResponseEntity<ResponseStructure<AdminResponse>> findAdmin(@PathVariable String adminId) {
+			
+			AdminResponse response = adminService.findAdmin(adminId);
+			return responseBuilder.success(HttpStatus.FOUND,"Admin Found", response);
+		}
 
 }
