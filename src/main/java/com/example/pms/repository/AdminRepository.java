@@ -7,8 +7,14 @@ package com.example.pms.repository;
 import org.springframework.stereotype.Repository;
 
 import com.example.pms.entity.Admin;
+import com.example.pms.entity.Pharmacy;
 @Repository
 	public interface AdminRepository extends JpaRepository<Admin,String>{
+
+	//HQL query to select the pharmacy associated with the admin
+
+		@Query("SELECT a.pharmacy FROM Admin a WHERE a.id= :adminId")
+		Pharmacy findPharmacyByAdminId(@Param("adminId") String adminId);
 		
 
 }
