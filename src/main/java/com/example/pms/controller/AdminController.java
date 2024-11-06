@@ -46,5 +46,11 @@ package com.example.pms.controller;
 			AdminResponse response = adminService.findAdmin(adminId);
 			return responseBuilder.success(HttpStatus.FOUND,"Admin Found", response);
 		}
+		@GetMapping("/findalladmins")
+		public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmins() {
+			
+			List<AdminResponse> responses = adminService.findAllAdmins();
+			return responseBuilder.success(HttpStatus.FOUND,"Admins Found", responses);
+		}
 
 }

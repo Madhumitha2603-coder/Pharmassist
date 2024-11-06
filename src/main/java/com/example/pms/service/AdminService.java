@@ -2,7 +2,9 @@ package com.example.pms.service;
 
 
 
-	import org.springframework.stereotype.Service;
+	import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 	import com.example.pms.entity.Admin;
 import com.example.pms.exception.AdminNotFoundByIdException;
@@ -36,5 +38,11 @@ import com.example.pms.mapper.AdminMapper;
 			                             .map(adminMapper::mapToAdminResponse)
 			                             .orElseThrow(() -> new AdminNotFoundByIdException("Failed to find admin"));
 				}
+			public List<AdminResponse> findAllAdmins() {
+			     return	adminRepository.findAll()
+		                               .stream()
+		                               .map(adminMapper::mapToAdminResponse)
+		                               .toList();		
+			}
 
 }
