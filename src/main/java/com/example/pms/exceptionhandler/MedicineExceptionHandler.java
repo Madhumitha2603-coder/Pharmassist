@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.example.pms.exception.InvalidDateFormatException;
 import com.example.pms.exception.InvalidFileFormateException;
 import com.example.pms.exception.NoAdminFoundException;
+import com.example.pms.exception.NoMedicineFoundException;
 import com.example.pms.utility.AppResponseBuilder;
 import com.example.pms.utility.ErrorStructure;
 
@@ -26,6 +27,11 @@ public class MedicineExceptionHandler {
 	}
 	@ExceptionHandler(InvalidFileFormateException.class)
 	public ResponseEntity<ErrorStructure> handleFileFormat(InvalidDateFormatException ex) {
+		
+		return responseBuilder.error(HttpStatus.NOT_ACCEPTABLE,ex.getMessage(),"File Format is invalid");
+	}
+	@ExceptionHandler(NoMedicineFoundException.class)
+	public ResponseEntity<ErrorStructure> handleMedicineFoundException(NoMedicineFoundException ex) {
 		
 		return responseBuilder.error(HttpStatus.NOT_ACCEPTABLE,ex.getMessage(),"File Format is invalid");
 	}
