@@ -27,6 +27,17 @@ import jakarta.persistence.OneToOne;
 		private Admin admin;
 		@OneToMany(mappedBy = "pharmacy")
 		private List<Patient> patients;
+		
+		@OneToMany (mappedBy = "pharmacy")
+		private List<Medicine> medicines;
+		
+		public List<Medicine> getMedicines() {
+			return medicines;
+		}
+
+		public void setMedicines(List<Medicine> medicines) {
+			this.medicines = medicines;
+		}
 
 		public List<Patient> getPatients() {
 			return patients;
