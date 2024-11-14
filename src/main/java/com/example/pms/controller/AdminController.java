@@ -32,7 +32,7 @@ package com.example.pms.controller;
 			this.responseBuilder = responseBuilder;
 		}
 		
-		@PostMapping("/admins")
+		@PostMapping("/register")
 		public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(@RequestBody @Valid AdminRequest adminRequest) {
 		
 			AdminResponse response =  adminService.addAdmin(adminRequest);

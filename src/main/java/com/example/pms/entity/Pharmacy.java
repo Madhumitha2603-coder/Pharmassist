@@ -18,8 +18,6 @@ import jakarta.persistence.OneToOne;
 		@GenerateCustomerId
 		private String pharmacyId;
 		private String name;
-	
-
 		private String gstNumber;
 		private String licenseNumber;
 		

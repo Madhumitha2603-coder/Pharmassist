@@ -2,7 +2,8 @@ package com.example.pms.exceptionhandler;
 
 	import org.springframework.http.HttpStatus;
 	import org.springframework.http.ResponseEntity;
-	import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 	import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 	import com.example.pms.exception.AdminNotFoundByIdException;
@@ -30,6 +31,11 @@ package com.example.pms.exceptionhandler;
 		public ResponseEntity<ErrorStructure> handleAdminNotFoundById(AdminNotFoundByIdException ex) {
 			
 			return responseBuilder.error(HttpStatus.NOT_FOUND,ex.getMessage(),"Admin is not found by Id");
+		}
+		@ExceptionHandler(UsernameNotFoundException.class)
+		public ResponseEntity<ErrorStructure> handleUsernameNotFoundById(UsernameNotFoundException ex) {
+
+			return responseBuilder.error(HttpStatus.NOT_FOUND,ex.getMessage(),"Username is not found by id ");
 		}
 
 
